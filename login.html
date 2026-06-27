@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Ketua Ekskul - OSEMKRA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --siddhi-blue: #0ea5e9; --text-dark: #1e293b; --bg-light: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-light); margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; color: var(--text-dark); }
+        .login-card { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); width: 100%; max-width: 360px; text-align: center; border: 1px solid #e2e8f0; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; }
+        p { color: #64748b; font-size: 14px; margin-bottom: 30px; }
+        .input-group { text-align: left; margin-bottom: 20px; }
+        label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #475569; display: block; margin-bottom: 6px; }
+        input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; box-sizing: border-box; font-family: inherit; }
+        input:focus { outline: none; border-color: var(--siddhi-blue); box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); }
+        button { width: 100%; padding: 12px; background: var(--siddhi-blue); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
+        button:hover { background: #0284c7; }
+        .error-msg { color: #ef4444; font-size: 13px; margin-top: 15px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>Dashboard Ketua</h2>
+        <p>Gunakan ID Ekskul untuk mengelola konten</p>
+        
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label>Username (ID Ekskul)</label>
+                <input type="text" id="username" placeholder="Contoh: futsal, teater, kir" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit">Masuk Sistem</button>
+            <div class="error-msg" id="errorBlock">Username atau Password salah!</div>
+        </form>
+    </div>
+
+    <script src="data-ekskul.js"></script>
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value.trim().toLowerCase();
+            const pass = document.getElementById('password').value;
+            const db = getMasterDatabase();
+
+            // Validasi: Jika ID terdaftar di DB & password adalah '123'
+            if (db[user] && pass === "123") {
+                localStorage.setItem("adminStatus", "active");
+                localStorage.setItem("adminEkskul", user);
+                window.location.href = `detail-ekskul.html?id=${user}`;
+            } else {
+                document.getElementById('errorBlock').style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

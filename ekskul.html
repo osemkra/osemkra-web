@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Ekstrakurikuler - OSEMKRA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --siddhi-blue: #0ea5e9; --sisya-orange: #f97316; --text-dark: #1e293b; --text-light: #64748b; --bg-light: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: #ffffff; line-height: 1.7; }
+        h1, h2, h3, .logo { font-family: 'Playfair Display', serif; margin-top: 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background-color: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: 800; color: #1e293b; text-decoration: none; }
+        .logo span { color: var(--siddhi-blue); }
+        
+        /* Navigasi Menu Tengah */
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--siddhi-blue); font-weight: 700; }
+        @media (max-width: 768px) { .nav-links { display: none; } }
+
+        .btn-panel { text-decoration: none; color: white; background: var(--text-dark); font-weight: 600; font-size: 13px; padding: 8px 16px; border-radius: 8px; }
+        
+        .admin-bar { background-color: #f0fdf4; border-bottom: 1px solid #bbf7d0; padding: 12px 8%; display: none; justify-content: space-between; align-items: center; font-size: 14px; position: sticky; top: 0; z-index: 101; }
+        .admin-title { color: #166534; font-weight: 600; }
+        .btn-add { background: var(--siddhi-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .btn-logout { background: #ef4444; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; margin-left: 8px; }
+
+        .main-container { padding: 60px 8%; max-width: 1200px; margin: 0 auto; }
+        .page-header { text-align: center; margin-bottom: 40px; }
+        .page-header h1 { font-size: 46px; color: #0f172a; margin-bottom: 15px; font-weight: 800; }
+        .page-header p { color: var(--text-light); font-size: 16px; max-width: 600px; margin: 0 auto; }
+        
+        .filter-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 50px; }
+        .filter-btn { background-color: var(--bg-light); border: 1px solid #e2e8f0; padding: 10px 20px; border-radius: 25px; font-size: 13px; font-weight: 600; color: var(--text-dark); cursor: pointer; transition: all 0.3s; }
+        .filter-btn:hover, .filter-btn.active { background-color: var(--siddhi-blue); color: white; border-color: var(--siddhi-blue); }
+        
+        .ekskul-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .ekskul-card { background: var(--bg-light); border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; transition: all 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .ekskul-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: var(--siddhi-blue); }
+        .ekskul-icon { font-size: 36px; margin-bottom: 15px; display: inline-block; }
+        .ekskul-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--sisya-orange); margin-bottom: 10px; }
+        .ekskul-card h3 { font-size: 22px; color: #0f172a; margin-bottom: 12px; font-weight: 700; }
+        
+        .ekskul-card p { font-size: 14px; color: var(--text-light); margin: 0 0 20px 0; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
+        
+        .btn-detail { color: var(--siddhi-blue); text-decoration: none; font-size: 13px; font-weight: 700; }
+        .ekskul-schedule { border-top: 1px solid #e2e8f0; padding-top: 15px; font-size: 12px; color: #94a3b8; margin-top: 15px; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 35px; border-radius: 16px; width: 100%; max-width: 450px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-height: 85vh; overflow-y: auto; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #475569; text-transform: uppercase; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 14px; box-sizing: border-box; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px; }
+        .btn-cancel { background: #e2e8f0; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        footer { background-color: #0f172a; color: white; text-align: center; padding: 40px 8%; font-size: 14px; margin-top: 80px; }
+
+         /* Wadah untuk menjejalkan tombol portal dan keluar */
+        .nav-actions { display: flex; gap: 10px; align-items: center; }
+        /* Gaya Tombol Login/Portal Utama */
+        .btn-panel {
+            display: inline-block;
+            text-decoration: none; /* Ini yang menghilangkan garis bawah */
+            color: #ffffff !important;
+            background-color: var(--siddhi-blue); /* Menggunakan warna biru tema OSEMKRA */
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 24px;
+            border-radius: 50px; /* Membuat sudutnya membulat sempurna */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(14, 165, 233, 0.2); /* Sedikit bayangan agar pop-up */
+        }
+
+        /* Efek saat mouse diarahkan ke tombol */
+        .btn-panel:hover {
+            background-color: #0284c7; /* Warna biru sedikit lebih gelap */
+            transform: translateY(-2px); /* Efek tombol terangkat */
+            box-shadow: 0 6px 12px rgba(14, 165, 233, 0.3);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-bar" id="superAdminBar">
+        <span class="admin-title">👑 Mode Super Admin: Manajemen Lembaga</span>
+        <div>
+            <button class="btn-add" onclick="openModal()">+ Tambah Ekskul Baru</button>
+            <button class="btn-logout" onclick="logoutSuper()">Keluar</button>
+        </div>
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo">OSEM<span>KRA</span></a>
+        <div class="nav-links">
+            <a href="index.html">Beranda</a>
+        </div>
+
+       <a href="login.html" id="navPortalBtn" class="btn-panel">Login Ketua Ekskul</a>    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1>Lembaga & Ekstrakurikuler</h1>
+            <p>Wadah resmi pengembangan potensi dan bakat siswa SMAN 1 Kramat.</p>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterKategori('all', event)">Semua</button>
+            <button class="filter-btn" onclick="filterKategori('Olahraga', event)">Olahraga</button>
+            <button class="filter-btn" onclick="filterKategori('Seni & Budaya', event)">Seni & Budaya</button>
+            <button class="filter-btn" onclick="filterKategori('Sains & Akademik', event)">Sains & Akademik</button>
+            <button class="filter-btn" onclick="filterKategori('Bela Negara', event)">Bela Negara & Khusus</button>
+        </div>
+
+        <div class="ekskul-grid" id="container-grid"></div>
+    </main>
+
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h2>Tambah Ekskul Baru</h2>
+            <form id="addEkskulForm" onsubmit="saveNewEkskul(event)">
+                <div class="form-group"><label>ID Unik (Tanpa Spasi)</label><input type="text" id="new-id" required></div>
+                <div class="form-group"><label>Nama Ekskul</label><input type="text" id="new-nama" required></div>
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select id="new-kategori">
+                        <option value="Olahraga">Olahraga</option>
+                        <option value="Seni & Budaya">Seni & Budaya</option>
+                        <option value="Sains & Akademik">Sains & Akademik</option>
+                        <option value="Bela Negara">Bela Negara</option>
+                        <option value="Khusus">Khusus</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Icon Emoji</label><input type="text" id="new-emoji" required></div>
+                <div class="form-group"><label>Jadwal Latihan</label><input type="text" id="new-jadwal" required></div>
+                <div class="form-group"><label>Jam</label><input type="text" id="new-waktu" value="15.30 - 17.30 WIB" required></div>
+                <div class="form-group"><label>Lokasi</label><input type="text" id="new-lokasi" required></div>
+                <div class="form-group"><label>Ketua</label><input type="text" id="new-ketua" required></div>
+                <div class="form-group"><label>Pembina</label><input type="text" id="new-pembina" required></div>
+                <div class="form-group"><label>Deskripsi</label><textarea id="new-deskripsi" rows="3" required></textarea></div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn-add">Simpan Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 OSEMKRA - SMAN 1 Kramat.</p></footer>
+
+    <script src="data-ekskul.js"></script>
+    <script>
+        const grid = document.getElementById('container-grid');
+        
+        function renderEkskul() {
+            grid.innerHTML = "";
+            const currentDB = getMasterDatabase(); 
+            for (let id in currentDB) {
+                const item = currentDB[id];
+                grid.innerHTML += `
+                    <div class="ekskul-card" data-cat="${item.kategori}">
+                        <div><span class="ekskul-icon">${item.emoji}</span><br><span class="ekskul-tag">${item.kategori}</span>
+                            <h3>${item.nama}</h3><p>${item.deskripsi}</p>
+                            <a href="detail-ekskul.html?id=${id}" class="btn-detail">Lihat Detail Ekskul &rarr;</a>
+                        </div>
+                        <div class="ekskul-schedule">📅 Jadwal: <strong>${item.jadwal}</strong></div>
+                    </div>`;
+            }
+        }
+
+        function filterKategori(kat, e) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            document.querySelectorAll('.ekskul-card').forEach(card => {
+                let cardCat = card.getAttribute('data-cat');
+                if(kat === 'all') card.style.display = 'flex';
+                else if (kat === 'Bela Negara') card.style.display = (cardCat === 'Bela Negara' || cardCat === 'Khusus') ? 'flex' : 'none';
+                else card.style.display = (cardCat === kat) ? 'flex' : 'none';
+            });
+        }
+
+        function checkSuperAdmin() {
+            if(localStorage.getItem("adminStatus") === "super") {
+                document.getElementById('superAdminBar').style.display = "flex";
+                document.getElementById('portalBtn').style.display = "none";
+            }
+        }
+
+        function openModal() { document.getElementById('addModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('addModal').style.display = 'none'; }
+
+        function saveNewEkskul(e) {
+            e.preventDefault();
+            const idBaru = document.getElementById('new-id').value.trim().toLowerCase();
+            const db = getMasterDatabase();
+
+            if(db[idBaru]) return alert("ID Ekskul sudah ada!");
+
+            db[idBaru] = {
+                nama: document.getElementById('new-nama').value, kategori: document.getElementById('new-kategori').value,
+                emoji: document.getElementById('new-emoji').value, jadwal: document.getElementById('new-jadwal').value,
+                waktu: document.getElementById('new-waktu').value, lokasi: document.getElementById('new-lokasi').value,
+                ketua: document.getElementById('new-ketua').value, pembina: document.getElementById('new-pembina').value,
+                deskripsi: document.getElementById('new-deskripsi').value, prestasi: ["Belum ada data."], galeri: [], proker: []
+            };
+            saveMasterDatabase(db);
+            alert("Ekskul berhasil ditambahkan!");
+            closeModal(); renderEkskul();
+        }
+
+        function logoutSuper() { localStorage.removeItem("adminStatus"); localStorage.removeItem("adminEkskul"); window.location.reload(); }
+
+        renderEkskul(); checkSuperAdmin();
+    </script>
+</body>
+</html>

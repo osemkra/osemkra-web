@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSEMKRA - SAFESTA KE-36</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- PENGATURAN DASAR --- */
+        :root {
+            --siddhi-blue: #0ea5e9;
+            --siddhi-dark: #0284c7;
+            --sisya-orange: #f97316;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --osis-color: #1e293b;
+            --hero-bg: #0b1121;
+        }
+
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: #ffffff; line-height: 1.7; }
+        h1, h2, h3, h4, .logo { font-family: 'Playfair Display', serif; margin-top: 0; }
+
+        /* --- NAVIGASI --- */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background-color: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--osis-color); letter-spacing: 0.5px; text-decoration: none; }
+        .logo span { color: var(--siddhi-blue); }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); margin-left: 25px; font-weight: 600; font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--siddhi-blue); }
+        
+        /* Tombol Navigasi Baru */
+        .btn-nav { background-color: var(--siddhi-blue); color: white !important; padding: 10px 22px; border-radius: 25px; transition: background-color 0.3s; }
+        .btn-nav:hover { background-color: var(--siddhi-dark); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 120px 8% 120px 8%;
+            background-color: var(--hero-bg);
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            min-height: 75vh;
+        }
+        .hero-text { flex: 1; max-width: 55%; }
+        .hero-text h1 { font-size: 64px; line-height: 1.15; margin-bottom: 25px; color: #ffffff; font-weight: 800; }
+        .highlight-italic { font-style: italic; color: var(--sisya-orange); }
+        .hero-text p { font-size: 16px; color: #cbd5e1; margin-bottom: 40px; font-weight: 400; max-width: 90%; line-height: 1.8; }
+        
+        .hero-buttons { display: flex; gap: 15px; margin-bottom: 50px; }
+        .btn-outline { display: inline-block; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: #ffffff; padding: 12px 26px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .btn-outline:hover { background-color: rgba(255, 255, 255, 0.1); border-color: #ffffff; }
+
+        .hero-divider { width: 40px; height: 2px; background-color: var(--sisya-orange); margin-bottom: 30px; }
+        .hero-stats { display: flex; gap: 40px; align-items: center; }
+        .stat-item { display: flex; flex-direction: column; gap: 5px; }
+        .stat-number { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 800; color: #ffffff; line-height: 1; }
+        .stat-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; color: #94a3b8; letter-spacing: 2px; text-transform: uppercase; }
+
+        .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none; transition: all 0.3s; }
+        .scroll-down:hover { background-color: rgba(255, 255, 255, 0.1); color: #ffffff; }
+        .hero-image { flex: 1; display: flex; justify-content: flex-end; position: relative; }
+
+        /* --- SECTIONS UMUM --- */
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 10px; color: #0f172a; margin-top: 40px;}
+        .section-subtitle { text-align: center; color: var(--text-light); margin-bottom: 50px; font-size: 15px; }
+        
+        .logo-philosophy { padding: 80px 8%; background-color: white; }
+        .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .phil-card { background: var(--bg-light); padding: 25px 20px; border-radius: 12px; text-align: center; border: 1px solid #f1f5f9; }
+        .phil-card h4 { color: var(--siddhi-dark); margin-bottom: 12px; font-size: 20px; }
+        .phil-card p { font-size: 14px; margin: 0; }
+
+        .mascot-section { padding: 80px 8%; background-color: var(--bg-light); }
+        .mascot-container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin-top: 40px; }
+        .mascot-card { background: white; border-radius: 20px; padding: 40px 30px; width: 40%; min-width: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .mascot-img-placeholder { width: 200px; height: 200px; border-radius: 50%; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; font-weight: 600; color: white; }
+        .img-siddhi { background-color: var(--siddhi-blue); }
+        .img-sisya { background-color: var(--sisya-orange); }
+        .mascot-card h3 { font-size: 32px; margin: 0 0 10px 0; }
+        .mascot-card.siddhi h3 { color: var(--siddhi-blue); }
+        .mascot-card.sisya h3 { color: var(--sisya-orange); }
+        .mascot-card p strong { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--text-dark); }
+        .mascot-card p { font-size: 15px; }
+
+        /* --- SECTION PENYELENGGARA --- */
+        .organizers-section { padding: 60px 8%; background-color: #ffffff; text-align: center; border-top: 1px solid #e2e8f0; }
+        .org-title { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #94a3b8; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; }
+        .org-logos-container { display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap; }
+        .org-logo-placeholder { width: 100px; height: 100px; border-radius: 50%; background-color: #f8fafc; border: 2px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 12px; font-weight: 600; text-align: center; padding: 10px; }
+
+        /* --- FOOTER --- */
+        footer { background-color: #0f172a; color: white; text-align: center; padding: 40px 8%; font-size: 14px; }
+        footer p { margin: 5px 0; }
+
+        /* Tombol Keluar di Navigasi */
+        .btn-logout-nav {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: 'Inter', sans-serif;
+            display: none; /* Disembunyikan secara default */
+        }
+        .btn-logout-nav:hover { background: #dc2626; }
+        
+        /* Wadah untuk menjejalkan tombol portal dan keluar */
+        .nav-actions { display: flex; gap: 10px; align-items: center; }
+        /* Gaya Tombol Login/Portal Utama */
+        .btn-panel {
+            display: inline-block;
+            text-decoration: none; /* Ini yang menghilangkan garis bawah */
+            color: #ffffff !important;
+            background-color: var(--siddhi-blue); /* Menggunakan warna biru tema OSEMKRA */
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 24px;
+            border-radius: 50px; /* Membuat sudutnya membulat sempurna */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(14, 165, 233, 0.2); /* Sedikit bayangan agar pop-up */
+        }
+
+        /* Efek saat mouse diarahkan ke tombol */
+        .btn-panel:hover {
+            background-color: #0284c7; /* Warna biru sedikit lebih gelap */
+            transform: translateY(-2px); /* Efek tombol terangkat */
+            box-shadow: 0 6px 12px rgba(14, 165, 233, 0.3);
+            text-decoration: none;
+        }
+
+        /* Tombol Sekunder (Garis Luar) */
+        .btn-outline { display: inline-block; background: transparent; color: var(--siddhi-blue); padding: 13px 28px; font-weight: 700; border-radius: 8px; border: 2px solid var(--siddhi-blue); text-decoration: none; font-size: 16px; transition: 0.3s; margin-left: 10px; }
+        .btn-outline:hover { background: var(--siddhi-blue); color: white; transform: translateY(-3px); }
+
+        /* Seksi Konten (Makna Logo & Maskot) */
+        .section-container { padding: 100px 8%; background: #ffffff; }
+        .section-container.dark-bg { background: #0f172a; color: white; }
+        
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .content-text h2 { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 20px; }
+        .content-text p { font-size: 16px; line-height: 1.8; color: #64748b; margin-bottom: 20px; }
+        .dark-bg .content-text p { color: #cbd5e1; }
+        
+        /* Kanvas Placeholder untuk Ilustrasi */
+        .illustration-canvas { 
+            width: 100%; 
+            aspect-ratio: 1 / 1; 
+            background: #f1f5f9; 
+            border-radius: 24px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .dark-bg .illustration-canvas { background: #1e293b; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        
+        /* Pengaturan gambar logo dan maskot agar tajam maksimal */
+        .illustration-canvas img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Memastikan seluruh ilustrasi masuk tanpa terpotong */
+            opacity: 1; /* Mengembalikan warna dan kontras asli 100% */
+            padding: 15px; /* Memberi ruang napas agar ilustrasi tidak menabrak tepi kanvas */
+            image-rendering: -webkit-optimize-contrast; /* Memaksa browser merender dengan tajam */
+            image-rendering: crisp-edges;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .content-text { order: 2; text-align: center; }
+            .illustration-canvas { order: 1; }
+        }
+
+        /* ==========================================
+           TWEAK UI PRO & ANIMASI
+           ========================================== */
+
+        /* 1. Animasi Masuk (Keyframes) */
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 2. Terapkan ke Kontainer Utama */
+        .container {
+            /* cubic-bezier memberikan efek pantulan/perlambatan yang sangat natural (ala Apple/Google) */
+            animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px); /* Tambahan efek kaca halus */
+        }
+
+        /* 3. Efek Muncul Bergantian (Cascading) pada Input */
+        .form-group, .btn-submit {
+            opacity: 0; /* Sembunyikan dulu di awal */
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Delay berurutan agar munculnya satu per satu layaknya ombak */
+        .header-form { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .btn-submit { animation-delay: 0.5s; }
+
+        /* 4. Tweak Tombol Submit (Efek Klik / Tactile) */
+        .btn-submit:active {
+            transform: translateY(2px) scale(0.98); /* Efek tombol benar-benar "ditekan" ke dalam */
+            box-shadow: 0 0 0 transparent;
+        }
+
+       /* Tombol Kotak Aspirasi di Navigasi (Kuning Solid - Font Bulat/Sans-serif) */
+        .btn-aspirasi-nav {
+            background-color: #FBBF24; 
+            color: #0f172a !important; 
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif; /* Menggunakan font Inter yang lebih modern dan membulat */
+            font-weight: 700; /* Dibuat tebal agar kontras dan terbaca jelas */
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        /* Efek Interaktif (Hover) */
+        .btn-aspirasi-nav:hover {
+            background-color: #F59E0B; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
+            color: #0f172a;
+        }
+
+        /* Wadah Khusus Duo Maskot */
+        .maskot-duo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Membagi area kanan menjadi 2 kolom sama rata */
+            gap: 20px; /* Jarak antar kotak maskot */
+            width: 100%;
+        }
+
+        /* Mengubah proporsi khusus untuk canvas maskot menjadi Portrait */
+        #maskot .illustration-canvas {
+            aspect-ratio: 3 / 4; /* Sangat pas untuk ilustrasi karakter berdiri */
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efek interaktif pro saat kursor mendekati salah satu maskot */
+        #maskot .illustration-canvas:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+            border-color: var(--siddhi-blue);
+        }
+
+        /* Wadah Utama untuk 2 Maskot di dalam content-grid */
+        .maskot-duo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .maskot-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #maskot .illustration-canvas {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background: #1e293b;
+            border-radius: 20px; /* Tambahkan radius agar halus */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .maskot-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #ffffff;
+            margin: 0;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <script src="data-ekskul.js"></script>
+    
+   <script src="data-ekskul.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const adminStatus = localStorage.getItem("adminStatus");
+            const adminEkskul = localStorage.getItem("adminEkskul");
+            
+            const portalBtn = document.getElementById("navPortalBtn");
+            const logoutBtn = document.getElementById("navLogoutBtn");
+
+            if (adminStatus === "super") {
+                portalBtn.innerHTML = "👑 Portal Super Admin";
+                portalBtn.href = "ekskul.html";
+                logoutBtn.style.display = "block"; // Munculkan tombol keluar
+            } 
+            else if (adminEkskul) {
+                const db = getMasterDatabase();
+                const dataEkskul = db[adminEkskul];
+                
+                if (dataEkskul) {
+                    portalBtn.innerHTML = "Portal " + dataEkskul.nama;
+                    portalBtn.href = "detail-ekskul.html?id=" + adminEkskul;
+                    logoutBtn.style.display = "block"; // Munculkan tombol keluar
+                }
+            }
+        });
+
+        // Fungsi untuk menghapus sesi login dan merefresh halaman
+        function handleLogout() {
+            if(confirm("Apakah kamu yakin ingin keluar dari akun ini?")) {
+                localStorage.removeItem("adminStatus");
+                localStorage.removeItem("adminEkskul");
+                window.location.reload(); // Refresh halaman agar kembali seperti pengunjung biasa
+            }
+        }
+    </script>
+   <nav>
+        <a href="index.html" class="logo">OSEM<span>KRA</span></a>
+        
+        <div class="nav-links">
+            <a href="program.html">Program Kerja</a>
+            <a href="ekskul.html">Ekstrakurikuler</a>
+            <a href="aspirasi.html" class="btn-aspirasi-nav">Kotak Aspirasi</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="login.html" id="navPortalBtn" class="btn-panel">Login Ketua Ekskul</a>
+            <button id="navLogoutBtn" class="btn-logout-nav" onclick="handleLogout()">Keluar</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="beranda">
+        <div class="hero-text">
+            <h1>Bergerak <span class="highlight-italic">Nyata,</span><br>Bersuara Bersama</h1>
+            <p>OSEMKRA hadir sebagai ruang aspirasi, gerak kreativitas, dan lahirnya pemimpin yang berkarakter kuat dan berdampak nyata.</p>
+            
+            <div class="hero-buttons">
+                <a href="aspirasi.html" class="btn-outline">Aspirasi</a>
+                <a href="program.html" class="btn-outline" style="background-color: rgba(255, 255, 255, 0.1); border-color: #ffffff;">Program Kerja</a>
+            </div>
+
+            <div class="hero-divider"></div>
+            
+
+            <div class="hero-stats">
+                <div class="stat-item"><span class="stat-number">58</span><span class="stat-label">Pengurus</span></div>
+                <div class="stat-item"><span class="stat-number">30+</span><span class="stat-label">Program</span></div>
+                <div class="stat-item"><span class="stat-number">22</span><span class="stat-label">Ekskul</span></div>
+                <div class="stat-item"><span class="stat-number">2026</span><span class="stat-label">Periode</span></div>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+        <a href="#makna-logo" class="scroll-down">&#8595;</a>
+    </section>
+
+
+    <div id="makna-logo" class="section-container">
+        <div class="content-grid">
+            <div class="illustration-canvas">
+                <img src="image/Logo.jpeg" alt="Logo OSEMKRA" class="logo-img">
+                </div>
+            <div class="content-text">
+                <h2>Filosofi Logo OSEMKRA</h2>
+                <p>Setiap garis dan warna dalam identitas visual OSEMKRA dirancang dengan presisi untuk mewakili semangat juang, kreativitas, dan sinergi antar siswa SMAN 1 Kramat.</p>
+                <p>Warna biru melambangkan wawasan yang luas dan ketenangan dalam berpikir, sementara aksen oranye merepresentasikan energi jiwa muda yang terus menyala untuk membawa perubahan.</p>
+            </div>
+        </div>
+    </div>
+
+   <!-- SEKSI MASKOT (TEMA GELAP) -->
+    <div id="maskot" class="section-container dark-bg">
+        <div class="content-grid">
+            <!-- Sisi Kiri: Teks -->
+            <div class="content-text">
+                <h2>Kenalan dengan Maskot Kami</h2>
+                <p>Hadir sebagai representasi karakter siswa SMAN 1 Kramat yang tangguh, cerdik, dan bersahabat. Maskot ini tidak hanya sekadar simbol, melainkan teman yang menemani setiap langkah dan program kerja organisasi.</p>
+                <p>Dengan proporsi desain yang dinamis dan ekspresi yang ramah, maskot ini dirancang untuk mudah beradaptasi dalam berbagai format visual maupun media cetak.</p>
+            </div>
+            
+            <!-- Sisi Kanan: Wadah Duo Maskot -->
+            <div class="maskot-duo-container">
+                <!-- Sisya -->
+                <div class="maskot-item">
+                    <div class="illustration-canvas">
+                        <img src="image/Siddhi.jpeg" alt="Maskot Sisya" class="maskot-img">
+                    </div>
+                    <h3 class="maskot-name">Siddhi</h3>
+                </div>
+                
+                <!-- Siddhi -->
+                <div class="maskot-item">
+                    <div class="illustration-canvas">
+                        <img src="image/Sisya.jpeg" alt="Maskot Siddhi" class="maskot-img">
+                    </div>
+                    <h3 class="maskot-name">Sisya</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="logo" style="color: white; margin-bottom: 15px; font-size: 20px;">OSEM<span>KRA</span></div>
+        <p>&copy; 2026 Hak Cipta Dilindungi.</p>
+        <p style="color: #94a3b8;">Penyelenggara Resmi Safesta Ke-36</p>
+    </footer>
+
+</body>
+</html>

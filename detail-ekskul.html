@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Ekstrakurikuler - OSEMKRA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --siddhi-blue: #0ea5e9; --sisya-orange: #f97316; --text-dark: #1e293b; --text-light: #64748b; --bg-light: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: #ffffff; line-height: 1.7; }
+        h1, h2, h3, .logo { font-family: 'Playfair Display', serif; margin-top: 0; }
+        
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background-color: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: 800; color: #1e293b; text-decoration: none; }
+        .logo span { color: var(--siddhi-blue); }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--siddhi-blue); }
+        .btn-panel { text-decoration: none; color: white; background: var(--text-dark); font-weight: 600; font-size: 13px; padding: 8px 16px; border-radius: 8px; }
+
+        .editor-banner { background-color: #f0fdf4; border-bottom: 1px solid #bbf7d0; padding: 12px 8%; display: none; justify-content: space-between; align-items: center; font-size: 14px; color: #166534; font-weight: 600; }
+        
+        .main-container { padding: 50px 8%; max-width: 1200px; margin: 0 auto; }
+        .back-link { text-decoration: none; color: var(--siddhi-blue); font-weight: 600; font-size: 14px; display: inline-block; margin-bottom: 30px; }
+        
+        .hero-detail { display: flex; gap: 40px; align-items: center; margin-bottom: 50px; background: var(--bg-light); padding: 40px; border-radius: 24px; border: 1px solid #e2e8f0; }
+        .hero-emoji { font-size: 80px; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
+        .hero-text h1 { font-size: 40px; color: #0f172a; margin-bottom: 10px; }
+        .tag-kat { display: inline-block; background: var(--siddhi-blue); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+        
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 50px; }
+        .info-box { background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 16px; }
+        .info-box span { font-size: 12px; color: var(--text-light); text-transform: uppercase; font-weight: 600; }
+        .info-box p { margin: 5px 0 0 0; font-weight: 700; color: #0f172a; }
+
+        .section-title { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 40px; margin-bottom: 20px; }
+        .section-title h2 { font-size: 28px; color: #0f172a; margin: 0; }
+        
+        /* Tombol Editor yang disembunyikan secara default */
+        .btn-edit-section { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; display: none; }
+        .btn-edit-section:hover { background: var(--siddhi-blue); color: white; border-color: var(--siddhi-blue); }
+        
+        .btn-danger { background: #fef2f2; color: #ef4444; border-color: #fca5a5; margin-right: 10px; }
+        .btn-danger:hover { background: #ef4444; color: white; border-color: #ef4444; }
+
+        .list-styled { padding-left: 20px; }
+        .list-styled li { margin-bottom: 10px; font-size: 15px; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item { height: 180px; background: #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 14px; font-style: italic; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        footer { background-color: #0f172a; color: white; text-align: center; padding: 40px 8%; font-size: 14px; margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+    <div class="editor-banner" id="editorBanner">
+        <span>✍️ Mode Editor: Kamu memiliki akses untuk mengelola halaman ekskul ini.</span>
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo">OSEM<span>KRA</span></a>
+        <div class="nav-links">
+            <a href="index.html">Beranda</a>
+            <a href="ekskul.html">Ekstrakurikuler</a>
+        </div>
+        <a href="login.html" id="portalBtn" class="btn-panel">Portal Ketua &rarr;</a>
+    </nav>
+
+    <main class="main-container">
+        <a href="ekskul.html" class="back-link">&larr; Kembali ke Daftar Ekskul</a>
+
+        <div id="detail-content">
+            </div>
+    </main>
+
+    <input type="file" id="foto-upload" accept="image/*" style="display:none;" onchange="prosesUploadFoto(event)">
+
+    <footer><p>&copy; 2026 OSEMKRA - SMAN 1 Kramat.</p></footer>
+
+    <script src="data-ekskul.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const ekskulId = urlParams.get('id');
+        
+        const adminStatus = localStorage.getItem("adminStatus");
+        const adminEkskul = localStorage.getItem("adminEkskul");
+
+        function loadDetail() {
+            const db = getMasterDatabase();
+            const data = db[ekskulId];
+
+            if (!data) {
+                document.getElementById('detail-content').innerHTML = `<h3>Data ekskul tidak ditemukan.</h3>`;
+                return;
+            }
+
+            const isAuthorized = (adminStatus === "super") || (adminEkskul === ekskulId);
+
+            document.getElementById('detail-content').innerHTML = `
+                <div class="hero-detail">
+                    <div class="hero-emoji">${data.emoji || '✨'}</div>
+                    <div class="hero-text">
+                        <span class="tag-kat">${data.kategori}</span>
+                        <h1>${data.nama}</h1>
+                        <p style="color: var(--text-light); margin: 0; max-width: 700px;">${data.deskripsi}</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-box"><span>Pembina</span><p>${data.pembina || '-'}</p></div>
+                    <div class="info-box"><span>Ketua Umum</span><p>${data.ketua || '-'}</p></div>
+                    <div class="info-box"><span>Jadwal Latihan</span><p>${data.jadwal} (${data.waktu || '15.30 WIB'})</p></div>
+                    <div class="info-box"><span>Lokasi Utama</span><p>${data.lokasi || '-'}</p></div>
+                </div>
+
+                <div class="section-title">
+                    <h2>Program Kerja Utama</h2>
+                    <div>
+                        <button class="btn-edit-section btn-danger" id="btn-hapus-proker" onclick="resetProker()">Hapus Semua</button>
+                        <button class="btn-edit-section" id="btn-edit-proker" onclick="manageProker()">+ Tambah Proker</button>
+                    </div>
+                </div>
+                <ul class="list-styled" id="proker-list">
+                    ${data.proker && data.proker.length > 0 ? data.proker.map(p => `<li>${p}</li>`).join('') : '<li>Belum ada program kerja yang dimasukkan.</li>'}
+                </ul>
+
+                <div class="section-title">
+                    <h2>Daftar Prestasi</h2>
+                    <div>
+                        <button class="btn-edit-section btn-danger" id="btn-hapus-prestasi" onclick="resetPrestasi()">Hapus Semua</button>
+                        <button class="btn-edit-section" id="btn-edit-prestasi" onclick="managePrestasi()">+ Tambah Prestasi</button>
+                    </div>
+                </div>
+                <ul class="list-styled" id="prestasi-list">
+                    ${data.prestasi && data.prestasi.length > 0 && data.prestasi[0] !== "Belum ada data." ? data.prestasi.map(pr => `<li>${pr}</li>`).join('') : '<li>Belum ada daftar prestasi.</li>'}
+                </ul>
+
+                <div class="section-title">
+                    <h2>Dokumentasi & Galeri</h2>
+                    <div>
+                        <button class="btn-edit-section btn-danger" id="btn-hapus-galeri" onclick="resetGaleri()">Hapus Semua Foto</button>
+                        <button class="btn-edit-section" id="btn-edit-galeri" onclick="triggerUpload()">+ Unggah Foto</button>
+                    </div>
+                </div>
+                <div class="gallery-grid" id="galeri-grid">
+                    ${data.galeri && data.galeri.length > 0 ? data.galeri.map(img => `<div class="gallery-item"><img src="${img}" alt="Kegiatan"></div>`).join('') : '<div class="gallery-item">Belum ada foto kegiatan.</div>'}
+                </div>
+            `;
+
+            // Tampilkan elemen khusus jika memiliki hak akses
+            if (isAuthorized) {
+                document.getElementById('editorBanner').style.display = "flex";
+                document.getElementById('portalBtn').style.display = "none";
+                
+                // Menampilkan tombol-tombol (Bug sebelumnya ada di sini)
+                document.getElementById('btn-edit-proker').style.display = "inline-block";
+                document.getElementById('btn-hapus-proker').style.display = "inline-block";
+                
+                document.getElementById('btn-edit-prestasi').style.display = "inline-block";
+                document.getElementById('btn-hapus-prestasi').style.display = "inline-block";
+                
+                document.getElementById('btn-edit-galeri').style.display = "inline-block";
+                document.getElementById('btn-hapus-galeri').style.display = "inline-block";
+            }
+        }
+
+        // ================= FITUR MANAJEMEN DATA =================
+
+        function manageProker() {
+            const input = prompt("Masukkan Program Kerja baru:");
+            if (input && input.trim() !== "") updateDataArray('proker', input.trim());
+        }
+
+        function managePrestasi() {
+            const input = prompt("Masukkan Prestasi baru yang diraih:");
+            if (input && input.trim() !== "") updateDataArray('prestasi', input.trim());
+        }
+
+        // Fitur Unggah Foto Dokumentasi (Baru)
+        function triggerUpload() {
+            document.getElementById('foto-upload').click();
+        }
+
+        function prosesUploadFoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Mengubah file gambar menjadi teks (Base64) agar bisa disimpan di LocalStorage
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const fotoBase64 = e.target.result;
+                updateDataArray('galeri', fotoBase64);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Fungsi Umum Penyimpanan
+        function updateDataArray(key, value) {
+            const db = getMasterDatabase();
+            const data = db[ekskulId];
+            
+            if(!data[key] || data[key][0] === "Belum ada data.") data[key] = [];
+            data[key].push(value);
+            
+            db[ekskulId] = data;
+            saveMasterDatabase(db);
+            loadDetail();
+        }
+
+        // ================= FITUR RESET / HAPUS =================
+        function resetProker() {
+            if(confirm("Yakin ingin menghapus SEMUA daftar proker?")) {
+                resetDataArray('proker');
+            }
+        }
+        function resetPrestasi() {
+            if(confirm("Yakin ingin menghapus SEMUA daftar prestasi?")) {
+                resetDataArray('prestasi');
+            }
+        }
+        function resetGaleri() {
+            if(confirm("Yakin ingin menghapus SEMUA foto dokumentasi?")) {
+                resetDataArray('galeri');
+            }
+        }
+
+        function resetDataArray(key) {
+            const db = getMasterDatabase();
+            db[ekskulId][key] = [];
+            saveMasterDatabase(db);
+            loadDetail();
+        }
+
+        loadDetail();
+    </script>
+</body>
+</html>

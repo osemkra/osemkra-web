@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotak Aspirasi - OSEMKRA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --siddhi-blue: #0ea5e9; --text-dark: #1e293b; --text-light: #64748b; --bg-light: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: #f1f5f9; color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; }
+        
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background-color: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
+        .logo { font-size: 24px; font-weight: 800; font-family: 'Playfair Display', serif; color: #1e293b; text-decoration: none; }
+        .logo span { color: var(--siddhi-blue); }
+        
+        .container { max-width: 600px; margin: 50px auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); flex-grow: 1; }
+        .header-form { text-align: center; margin-bottom: 30px; }
+        .header-form h1 { font-family: 'Playfair Display', serif; font-size: 32px; margin: 0 0 10px 0; }
+        .header-form p { color: var(--text-light); font-size: 15px; margin: 0; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: inherit; font-size: 15px; box-sizing: border-box; transition: border-color 0.3s; }
+        .form-control:focus { outline: none; border-color: var(--siddhi-blue); box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1); }
+        
+        .btn-submit { width: 100%; background: var(--siddhi-blue); color: white; border: none; padding: 14px; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { background: #0284c7; }
+        
+        /* Loading Overlay */
+        #loading { display: none; text-align: center; color: var(--text-light); font-weight: 500; margin-top: 15px; }
+        #success-msg { display: none; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; padding: 15px; border-radius: 10px; text-align: center; font-weight: 600; margin-top: 20px; }
+
+        footer { text-align: center; padding: 20px; color: var(--text-light); font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">OSEM<span>KRA</span></a>
+        <a href="index.html" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">&larr; Kembali</a>
+    </nav>
+
+    <div class="container">
+        <div class="header-form">
+            <h1>Kotak Aspirasi</h1>
+            <p>Suaramu adalah awal dari perubahan SMAN 1 Kramat.</p>
+        </div>
+
+        <form id="formAspirasi" name="formAspirasi">
+            <div class="form-group">
+                <label>Nama (Boleh Dikosongkan / Anonim)</label>
+                <!-- Atribut 'name' sangat penting karena dibaca oleh Google Sheet -->
+                <input type="text" name="nama" class="form-control" placeholder="Nama Samaran atau Asli...">
+            </div>
+
+            <div class="form-group">
+                <label>Kelas</label>
+                <input type="text" name="kelas" class="form-control" placeholder="Contoh: XI.2" required>
+            </div>
+
+            <div class="form-group">
+                <label>Kategori Aspirasi</label>
+                <select name="kategori" class="form-control" required>
+                    <option value="" disabled selected>Pilih salah satu...</option>
+                    <option value="Saran & Ide Proker">💡 Saran & Ide Proker</option>
+                    <option value="Kritik Pembangunan">🛠️ Kritik Pembangunan</option>
+                    <option value="Laporan Khusus">📢 Laporan Khusus</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Pesan Aspirasi</label>
+                <textarea name="pesan" class="form-control" rows="5" placeholder="Sampaikan apa yang ingin kamu utarakan..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnSubmit">Kirim Aspirasi Sekarang</button>
+            <div id="loading">Sedang mengirimkan pesanmu... 🚀</div>
+            <div id="success-msg">Terima kasih! Aspirasimu berhasil terkirim ke sistem OSEMKRA.</div>
+        </form>
+    </div>
+
+    <footer>&copy; 2026 OSEMKRA - SMAN 1 Kramat</footer>
+
+    <script>
+        // MASUKKAN URL GOOGLE APPS SCRIPT KAMU DI SINI!
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzaPB_6_70zI5YeBstDH1jJsqOxEgiYYTeVPCnp9s5_jDvJMOYLzToMKl5xy8T8JZ50/exec';
+        const form = document.forms['formAspirasi'];
+        
+        const btnSubmit = document.getElementById('btnSubmit');
+        const loading = document.getElementById('loading');
+        const successMsg = document.getElementById('success-msg');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault(); // Mencegah halaman ter-refresh otomatis
+            
+            // Mengubah tampilan tombol menjadi mode loading
+            btnSubmit.style.display = 'none';
+            loading.style.display = 'block';
+
+            // Mengirim data ke Google Sheets
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    loading.style.display = 'none';
+                    successMsg.style.display = 'block';
+                    form.reset(); // Mengosongkan form setelah sukses
+                    
+                    // Kembalikan tombol setelah 3 detik
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                        btnSubmit.style.display = 'block';
+                    }, 3000);
+                })
+                .catch(error => {
+                    alert('Gagal mengirim aspirasi! Silakan coba lagi.');
+                    loading.style.display = 'none';
+                    btnSubmit.style.display = 'block';
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Kerja - OSEMKRA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --siddhi-blue: #0ea5e9;
+            --siddhi-dark: #0284c7;
+            --sisya-orange: #f97316;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --osis-color: #1e293b;
+        }
+
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: #ffffff; line-height: 1.7; }
+        h1, h2, h3, .logo { font-family: 'Playfair Display', serif; margin-top: 0; }
+
+        /* --- NAVIGASI MINIMALIS --- */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background-color: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--osis-color); letter-spacing: 0.5px; text-decoration: none; }
+        .logo span { color: var(--siddhi-blue); }
+        .nav-links { display: flex; justify-content: center; align-items: center; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--siddhi-blue); }
+        .btn-back { display: flex; justify-content:center; align-items: center; gap: 8px; color: var(--text-dark); }
+
+        /* --- KONTEN UTAMA PROGRAM --- */
+        .main-container { padding: 80px 8%; max-width: 1200px; margin: 0 auto; }
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .page-header h1 { font-size: 46px; color: #0f172a; margin-bottom: 15px; font-weight: 800; }
+        .page-header p { color: var(--text-light); font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+        .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .program-card { background: var(--bg-light); border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px 35px; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
+        .program-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.05); border-color: var(--siddhi-blue); }
+        
+        .program-content-top { margin-bottom: 25px; }
+        .program-tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--sisya-orange); margin-bottom: 15px; }
+        .program-card h3 { font-size: 26px; color: #0f172a; margin-bottom: 15px; font-weight: 700; }
+        .program-card p { font-size: 15px; color: var(--text-light); margin: 0; line-height: 1.8; }
+        
+        .program-meta { border-top: 1px solid #e2e8f0; padding-top: 20px; font-size: 13px; color: #94a3b8; font-weight: 500; display: flex; justify-content: space-between; }
+        .program-meta span strong { color: var(--text-dark); }
+
+        /* --- FOOTER --- */
+        footer { background-color: #0f172a; color: white; text-align: center; padding: 40px 8%; font-size: 14px; margin-top: 100px; }
+        footer p { margin: 5px 0; }
+
+         /* Tombol Kotak Aspirasi di Navigasi (Kuning Solid - Font Bulat/Sans-serif) */
+        .btn-aspirasi-nav {
+            background-color: #FBBF24; 
+            color: #0f172a !important; 
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif; /* Menggunakan font Inter yang lebih modern dan membulat */
+            font-weight: 700; /* Dibuat tebal agar kontras dan terbaca jelas */
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        /* Efek Interaktif (Hover) */
+        .btn-aspirasi-nav:hover {
+            background-color: #F59E0B; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">OSEM<span>KRA</span></a>
+        <div class="nav-links">
+            <a href="index.html">Beranda</a>
+             <a href="aspirasi.html" class="btn-aspirasi-nav">Kotak Aspirasi</a>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1>Program Kerja OSEMKRA</h1>
+            <p>Daftar inisiatif dan agenda strategis resmi yang dikembangkan demi mendorong kemajuan, aspirasi, dan prestasi seluruh siswa.</p>
+        </div>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-content-top">
+                    <span class="program-tag">Event Utama</span>
+                    <h3>SAFESTA KE-36</h3>
+                    <p>Festival besar tahunan SMAN 1 Kramat yang mewadahi pentas seni akbar, kompetisi kreativitas antar-kelas, serta pameran seni budaya sebagai ruang ekspresi bakat non-akademik siswa.</p>
+                </div>
+                <div class="program-meta">
+                    <span>Pelaksanaan: <strong>Tahunan</strong></span>
+                    <span>Fokus: <strong>Kreativitas & Seni</strong></span>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-content-top">
+                    <span class="program-tag">Layanan Siswa</span>
+                    <h3>Kotak Suara Sisya</h3>
+                    <p>Sistem penjaringan aspirasi berbasis digital dan fisik guna mengumpulkan opini, kritik membangun, maupun ide fasilitas kreatif dari siswa langsung ke meja jajaran pengurus OSEMKRA.</p>
+                </div>
+                <div class="program-meta">
+                    <span>Pelaksanaan: <strong>Setiap Bulan</strong></span>
+                    <span>Fokus: <strong>Aspirasi & Advokasi</strong></span>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-content-top">
+                    <span class="program-tag">Pengembangan Pemimpin</span>
+                    <h3>LDK Siddhi Mandiri</h3>
+                    <p>Pelatihan kepemimpinan intensif terstruktur yang mengajarkan manajemen keorganisasian, penyusunan rencana aksi kerja nyata, teknik komunikasi publik, serta simulasi problem-solving.</p>
+                </div>
+                <div class="program-meta">
+                    <span>Pelaksanaan: <strong>Awal Periode</strong></span>
+                    <span>Fokus: <strong>Kaderisasi Kepemimpinan</strong></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="logo" style="color: white; margin-bottom: 15px; font-size: 20px;">OSEM<span>KRA</span></div>
+        <p>&copy; 2026 Hak Cipta Dilindungi.</p>
+        <p style="color: #94a3b8;">Halaman Resmi Program Kerja Organisasi</p>
+    </footer>
+
+</body>
+</html>
